@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from './src/screens/RegistrationOnboardScreen'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import RegistrationOnboardScreen from './src/screens/RegistrationOnboardScreen'
+import RegistrationStack from './src/Stacks/RegistrationStack'
 
 const Stack = createNativeStackNavigator();
 
@@ -52,8 +53,8 @@ const App = () => {
             component={OnboardingScreen}
           />
         )}
-          <Stack.Screen name="RegistrationOnboardScreen" component={RegistrationOnboardScreen} options={{headerShown: false}} />
-        {/* <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} /> */}
+          <Stack.Screen name="RegistrationStack" component={RegistrationStack} options={{headerShown: false}} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
       </Stack.Navigator>}
     </NavigationContainer >
   )
