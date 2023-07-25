@@ -1,19 +1,31 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
-import RegistrationOnboardScreen from '../screens/RegistrationOnboardScreen'
-import RegistrationScreen from '../screens/RegistrationScreen'
+/* eslint-disable prettier/prettier */
+import {View, Text} from 'react-native';
+import React from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
+import RegistrationOnboardScreen from '../screens/RegistrationOnboardScreen';
+import RegistrationScreen from '../screens/RegistrationScreen';
 
-const RegStack = createStackNavigator()
+const RegStack = createStackNavigator();
 
+const RegistrationStack = ({navigation}: any) => {
+  //  initialRouteName = 'RegistrationOnBoardScreen'
+  return (
+    <RegStack.Navigator screenOptions={{
+      headerStyle: { elevation: 0 },
+      cardStyle: { backgroundColor: '#fff' }
+    }}>
+      <RegStack.Screen
+        name="RegistrationScreen"
+        component={RegistrationScreen}
+        options={{headerShown: false}}
+      />
+      <RegStack.Screen
+        name="RegistrationOnBoardScreen"
+        component={RegistrationOnboardScreen}
+        options={{headerShown: false}}
+      />
+    </RegStack.Navigator>
+  );
+};
 
-const RegistrationStack = ({navigation}:any) => {
-    return (
-        <RegStack.Navigator initialRouteName='RegistrationOnBoardScreen'>
-            <RegStack.Screen name='RegistrationOnBoardScreen' component={RegistrationOnboardScreen} />
-            <RegStack.Screen name='RegistrationScreen' component={RegistrationScreen} />
-        </RegStack.Navigator>
-    )
-}
-
-export default RegistrationStack
+export default RegistrationStack;

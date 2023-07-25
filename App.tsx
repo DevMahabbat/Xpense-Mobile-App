@@ -9,6 +9,7 @@ import HomeScreen from './src/screens/RegistrationOnboardScreen'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import RegistrationOnboardScreen from './src/screens/RegistrationOnboardScreen'
 import RegistrationStack from './src/Stacks/RegistrationStack'
+import HomeTab from './src/Tabs/HomeTab'
 
 const Stack = createNativeStackNavigator();
 
@@ -26,36 +27,39 @@ const App = () => {
       if (res) {
         let data = JSON.parse(res)
         setFirstTime(data)
-        
-        
 
-         
+
+
+
 
       }
       setLoading(false);
       SplashScreen.hide()
     })
-   
+
 
 
   }, [])
 
 
- 
+
   return (
     <NavigationContainer>
-      {loading  ?  null : 
-      <Stack.Navigator initialRouteName={!isFirstTime? "OnboardingScreen" : "RegistrationOnboardScreen"}>
-        {!isFirstTime && (
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="OnboardingScreen"
-            component={OnboardingScreen}
-          />
-        )}
-          <Stack.Screen name="RegistrationStack" component={RegistrationStack} options={{headerShown: false}} />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
-      </Stack.Navigator>}
+      {loading ? null :
+        <Stack.Navigator initialRouteName={!isFirstTime ? "OnboardingScreen" : "HomeTab"}   >
+          {!isFirstTime && (
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="OnboardingScreen"
+              component={OnboardingScreen}
+            />
+          )}
+          <Stack.Screen name="RegistrationStack" component={RegistrationStack} options={{ headerShown: false }}/>
+          <Stack.Screen name="HomeTab" component={HomeTab} options={{ headerShown: false }} />
+        
+       
+         
+        </Stack.Navigator>}
     </NavigationContainer >
   )
 

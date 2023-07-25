@@ -3,8 +3,8 @@ import { Text, StyleSheet, Image, View, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 
-const RegistrationOnboardScreen = ({navigation}:any) => {
-  
+const RegistrationOnboardScreen = ({ navigation }: any) => {
+
 
     return (
         <View style={styles.onboarding5}>
@@ -47,7 +47,7 @@ const RegistrationOnboardScreen = ({navigation}:any) => {
                     Log into account
                 </Text>
             </Pressable>
-          
+
         </View>
     );
 };
