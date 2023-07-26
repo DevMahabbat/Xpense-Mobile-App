@@ -5,12 +5,14 @@ import HomeScreen from '../screens/HomeStackScreens/HomeScreen'
 
 const HomeStackNav = createNativeStackNavigator()
 
-const HomeStack = () => {
+const HomeStack = ({navigation}:any) => {
   return (
-    <HomeStackNav.Navigator>
+    <>
+      <HomeStackNav.Navigator >
           <HomeStackNav.Screen name='HomeScreen' component={HomeScreen} options={{ headerShown: false }} />
     
     </HomeStackNav.Navigator>
+    </>
   )
 }
 

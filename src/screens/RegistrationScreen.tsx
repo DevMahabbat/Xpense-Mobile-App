@@ -1,7 +1,8 @@
-import { Alert, Dimensions, Image, Linking, Pressable, StyleSheet, Text, TextInput, Touchable, View } from 'react-native';
+import { Alert, Dimensions, Image, Keyboard, KeyboardAvoidingView, Linking, Pressable, ScrollView, StyleSheet, Text, TextInput, Touchable, TouchableWithoutFeedback, View } from 'react-native';
 import React, { useCallback, useState } from 'react';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { AvoidSoftInput, AvoidSoftInputView } from 'react-native-avoid-softinput';
 let { width: dwidth, height: dheight, fontScale: fontscale, } = Dimensions.get('window')
-
 
 const openurl = async (url: string) => {
   // Checking if the link is supported for links with custom URL scheme.
@@ -16,10 +17,11 @@ const openurl = async (url: string) => {
   }
 }
 
-const RegistrationScreen = () => {
+const RegistrationScreen = ({ navigation }: any) => {
 
-
-
+  // const navigation = useNavigation()
+  const goToSignInPage = () => { navigation.navigate("LoginScreen") }
+  //how to navigate to LoginScreen react native?
   console.log("width:", dwidth);
   console.log("height:", dheight);
 
@@ -28,81 +30,106 @@ const RegistrationScreen = () => {
   const [phone, setPhone] = useState<string>("");
   const [password, setPassword] = useState<string>("")
   const [password2, setPassword2] = useState<string>("");
+
+
+
+  const onFocusEffect = React.useCallback(() => {
+    // This should be run when screen gains focus - enable the module where it's needed
+    AvoidSoftInput.setShouldMimicIOSBehavior(true);
+    AvoidSoftInput.setEnabled(true);
+    return () => {
+      // This should be run when screen loses focus - disable the module where it's not needed, to make a cleanup
+      AvoidSoftInput.setEnabled(false);
+      AvoidSoftInput.setShouldMimicIOSBehavior(false);
+    };
+  }, []);
+
+  useFocusEffect(onFocusEffect); // register callback to focus events
+
   return (
     <>
-      <Text style={styles.createAnAccount1}>Create an Account</Text>
-      <Text style={styles.getAnAccount1}>Get an account and control your finances better with full control of your budgets and savings.</Text>
+
+      <AvoidSoftInputView>
+        <ScrollView>
+
+          <Text style={styles.createAnAccount1}>Create an Account</Text>
+          <Text style={styles.getAnAccount1}>Get an account and control your finances better with full control of your budgets and savings.</Text>
 
 
-      <TextInput
-        maxLength={40}
-        onChangeText={text => setName(text)}
-        value={name}
-        autoCapitalize='words'
+          <TextInput
+            maxLength={40}
+            onChangeText={text => setName(text)}
+            value={name}
+            autoCapitalize='words'
 
-        placeholder="Enter name*"
-        style={styles.inputContainer} />
-      <TextInput
-        inputMode='email'
-        autoComplete='email'
-        maxLength={40}
-        onChangeText={text => setEmail(text)}
-        value={email}
-        placeholder="Enter email*"
-        style={styles.inputContainer} />
-      <TextInput
-        maxLength={40}
-        onChangeText={text => setPhone(text)}
-        value={phone}
-        placeholder="Enter Phone number*"
-        style={styles.inputContainer} />
-      <TextInput
-        maxLength={40}
-        onChangeText={text => setPassword(text)}
-        value={password}
-        secureTextEntry={true}
-        placeholder="Enter password*"
-        style={styles.inputContainer} />
+            placeholder="Enter name*"
+            style={styles.inputContainer} />
+          <TextInput
+            inputMode='email'
+            autoComplete='email'
+            maxLength={40}
+            onChangeText={text => setEmail(text)}
+            value={email}
+            placeholder="Enter email*"
+            style={styles.inputContainer} />
+          <TextInput
+            maxLength={40}
+            onChangeText={text => setPhone(text)}
+            value={phone}
+            placeholder="Enter Phone number*"
+            style={styles.inputContainer} />
+          <TextInput
+            maxLength={40}
+            onChangeText={text => setPassword(text)}
+            value={password}
+            secureTextEntry={true}
+            placeholder="Enter password*"
+            style={styles.inputContainer} />
 
-      <TextInput
-        maxLength={40}
-        onChangeText={text => setPassword2(text)}
-        value={password2}
-        secureTextEntry={true}
-        placeholder="Confirm password*"
-        style={styles.inputContainer} />
+          <TextInput
+            maxLength={40}
+            onChangeText={text => setPassword2(text)}
+            value={password2}
+            secureTextEntry={true}
+            placeholder="Confirm password*"
+            style={styles.inputContainer} />
 
-      <Pressable style={styles.createAccountParent} onPress={() => { } }>
-        <Text style={styles.createAccount}>Create account</Text>
-      </Pressable>
+          <Pressable style={styles.createAccountParent} onPress={() => { }}>
+            <Text style={styles.createAccount}>Create account</Text>
+          </Pressable>
 
-      <Text style={styles.byCreatingAnContainer}>{`By creating an account, you have accepted the `}
-        <Text style={styles.termsConditions}>{`TERMS & CONDITIONS`}</Text>{` of Track buddy. `}
-      </Text>
-    
-      <View style={styles.lineParent}>
-        <View style={styles.groupChild} />
-        <View style={styles.orCreateAccountWithWrapper}>
-          <Text style={styles.orCreateAccount1}>Or Create account with</Text>
-        </View>
-      </View>
+          <Text style={styles.byCreatingAnContainer}>{`By creating an account, you have accepted the `}
+            <Text style={styles.termsConditions}>{`TERMS & CONDITIONS`}</Text>{` of Track buddy. `}
+          </Text>
 
-      <Pressable onPress={() => console.log('pressed')}>
-      <View style={styles.frameParent}>
-        <View style={styles.iconParent}>
-          <Image style={styles.icon1} resizeMode="cover" source={require("../assets/images/google.png")} />
-          <Text style={styles.text1}>Google</Text> 
-        </View>   
-      </View>
-      </Pressable>
+          <View style={styles.lineParent}>
+            <View style={styles.groupChild} />
+            <View style={styles.orCreateAccountWithWrapper}>
+              <Text style={styles.orCreateAccount1}>Or Create account with</Text>
+            </View>
+          </View>
+
+          <Pressable onPress={() => console.log('pressed')}>
+            <View style={styles.frameParent}>
+              <View style={styles.iconParent}>
+                <Image style={styles.icon1} resizeMode="cover" source={require("../assets/images/google.png")} />
+                <Text style={styles.text1}>Google</Text>
+              </View>
+            </View>
+          </Pressable>
 
 
-      <Pressable onPress={() => { }}>
-        <Text style={styles.text}>
-          <Text style={styles.alreadyHaveAn1}>{`Already have an Account ? `}</Text>
-          <Text style={styles.logIn}>Log in</Text>
-        </Text>
-      </Pressable>
+          <Pressable onPress={() => { goToSignInPage() }}>
+            <Text style={styles.text}>
+              <Text style={styles.alreadyHaveAn1}>{`Already have an Account ? `}</Text>
+              <Text style={styles.logIn}>Log in</Text>
+            </Text>
+          </Pressable>
+
+
+        </ScrollView>
+      </AvoidSoftInputView>
+
     </>
 
 
@@ -114,6 +141,7 @@ const RegistrationScreen = () => {
 
 const styles = StyleSheet.create({
   createAnAccount1: {
+
     fontSize: 24,
     lineHeight: 32,
     fontWeight: "700",
@@ -122,6 +150,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     width: dwidth,
     marginTop: 41,
+    // marginTop:200,
     marginLeft: 26,
   },
   getAnAccount1: {
@@ -221,7 +250,7 @@ const styles = StyleSheet.create({
   },
   lineParent: {
 
-    width: dwidth/8*7,
+    width: dwidth / 8 * 7,
     height: 18,
     marginHorizontal: dwidth / 12,
     marginTop: dheight / 68
@@ -231,7 +260,7 @@ const styles = StyleSheet.create({
 
 
 
-icon1: {
+  icon1: {
     width: 32,
     height: 32,
     overflow: "hidden"
@@ -264,24 +293,24 @@ icon1: {
     borderStyle: "solid",
     borderColor: "rgba(41, 176, 41, 0.2)",
     borderWidth: 1,
-   height: dheight/12,
-    marginHorizontal: dwidth /15,
+    height: dheight / 12,
+    marginHorizontal: dwidth / 15,
     width: dwidth * 7 / 8,
     paddingHorizontal: 115,
-    paddingVertical: dheight/50,
+    paddingVertical: dheight / 50,
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
     marginTop: dheight / 68
   }
 
-,
+  ,
 
 
   alreadyHaveAn1: {
     fontFamily: "DM Sans_regular",
     color: "#000",
-     
+
   },
   logIn: {
     // textDecoration: "underline",

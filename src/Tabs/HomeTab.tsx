@@ -19,7 +19,10 @@ const HomeTab = () => {
             tabBarInactiveTintColor: '#444',
             headerShown: false,
             tabBarShowLabel: false,
-        })}>
+            headerStyle: { elevation: 0 }, cardStyle: { backgroundColor: '#fff' }
+        })}
+           
+        >
             <Tab.Screen component={HomeStack} name='HomeStack' 
                 options={{
                     tabBarIcon: ({ focused }) => (
@@ -35,6 +38,8 @@ const HomeTab = () => {
                             ) : null}
                         </View>
                     ),
+
+                
                 }}
             
             />

@@ -10,6 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import RegistrationOnboardScreen from './src/screens/RegistrationOnboardScreen'
 import RegistrationStack from './src/Stacks/RegistrationStack'
 import HomeTab from './src/Tabs/HomeTab'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +45,7 @@ const App = () => {
 
 
   return (
+
     <NavigationContainer>
       {loading ? null :
         <Stack.Navigator initialRouteName={!isFirstTime ? "OnboardingScreen" : "HomeTab"}   >
@@ -61,6 +63,7 @@ const App = () => {
          
         </Stack.Navigator>}
     </NavigationContainer >
+ 
   )
 
 

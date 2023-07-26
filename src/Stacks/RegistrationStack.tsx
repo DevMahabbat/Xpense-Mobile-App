@@ -4,6 +4,7 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import RegistrationOnboardScreen from '../screens/RegistrationOnboardScreen';
 import RegistrationScreen from '../screens/RegistrationScreen';
+import LoginScreen from '../screens/LoginScreen';
 
 const RegStack = createStackNavigator();
 
@@ -18,6 +19,11 @@ const RegistrationStack = ({navigation}: any) => {
         name="RegistrationScreen"
         component={RegistrationScreen}
         options={{headerShown: false}}
+      />
+      <RegStack.Screen
+        name="LoginScreen"
+        component={LoginScreen}
+        options={{ headerShown: false }}
       />
       <RegStack.Screen
         name="RegistrationOnBoardScreen"
