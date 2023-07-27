@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         marginTop: 24,
         marginHorizontal: dwidth / 17,
-        color: ""
+        color: "black"
         
     }
     , createAccount: {
