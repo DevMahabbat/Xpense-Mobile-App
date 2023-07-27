@@ -14,7 +14,7 @@ const OnboardingScreen = ({navigation} :any) => {
             setCurrentIndex(currentIndex + 1);
         } else {
             await AsyncStorage.setItem("isNotFirstTimeOnBoarding","true");
-            navigation.navigate('HomeScreen');
+            navigation.navigate('HomeTab');
         }
     };
 

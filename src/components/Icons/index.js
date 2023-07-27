@@ -1,4 +1,5 @@
 export {default as ActionIcon} from './ActionIcon';
+export {default as ArrowBackIcon} from './ArrowBackIcon';
 export {default as CarIcon} from './CarIcon';
 export {default as DinnerIcon} from './DinnerIcon';
 export {default as EngineOilCarIcon} from './EngineOilCarIcon';
