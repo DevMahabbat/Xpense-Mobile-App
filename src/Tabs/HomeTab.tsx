@@ -16,10 +16,14 @@ const HomeTab = () => {
                 borderTopWidth: 0,
             },
             tabBarActiveTintColor: 'red',
-            tabBarInactiveTintColor: '#444',
+            tabBarInactiveTintColor: 'blue',
+            activeTintColor: "red",
+
             headerShown: false,
             tabBarShowLabel: false,
-            headerStyle: { elevation: 0 }, cardStyle: { backgroundColor: '#fff' }
+            headerStyle: { elevation: 0 }, cardStyle: { backgroundColor: 'red' },
+       
+           
         })}
            
         >
@@ -35,10 +39,11 @@ const HomeTab = () => {
                                 <Text style={{ marginLeft: 5, fontSize: 12, color: '#815CFF' }}>
                                     Home
                                 </Text>
-                            ) : null}
+                            ) : null} 
+                          
                         </View>
                     ),
-
+        
                 
                 }}
             

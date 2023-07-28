@@ -7,7 +7,7 @@ let { width: dwidth, height: dheight, fontScale: fontscale, } = Dimensions.get('
 
 
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}:any) => {
 
   console.log(dwidth, dheight, fontscale);
 
@@ -32,7 +32,7 @@ const HomeScreen = () => {
         </View>
 
       <ScrollView>
-        <Text style={styles.helloChadwick}>Hello Chadwick,</Text>
+        <Text style={styles.helloChadwick}>Hello Dear,</Text>
         <Text style={styles.whatExpensesDid1}>What expenses did you make today ?</Text>
 
 
@@ -64,7 +64,7 @@ const HomeScreen = () => {
 
 
       </ScrollView> 
-<View style={styles.ActionIcon}><ActionIcon /></View>
+<Pressable onPress={()=> {navigation.navigate("AddTransactionScreen")}} style={styles.ActionIcon}><ActionIcon /></Pressable>
 
 
       </View>
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     top: 3,
     left: 288,
     fontSize: 12,
-    textDecoration: "underline",
+    // textDecoration: "underline",
     lineHeight: 18,
     fontFamily: "DMSans-Regular",
     color: "#29b029"

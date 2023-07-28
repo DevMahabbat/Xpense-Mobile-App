@@ -5,15 +5,15 @@ import { dheight, dwidth } from '../../utils/screenwidth'
 import { Picker } from '@react-native-picker/picker';
 import { useFocusEffect } from '@react-navigation/native';
 import { AvoidSoftInput, AvoidSoftInputView } from 'react-native-avoid-softinput';
-const AddTransactionScreen = ({navigation}:any) => {
-    console.log(dwidth,dheight);
+const AddTransactionScreen = ({ navigation }: any) => {
+    console.log(dwidth, dheight);
     const [name, setName] = useState<string>('')
     const [selectedLanguage, setSelectedLanguage] = useState<string>("");
     const [amount, setAmount] = useState<string>("");
     const [description, setDescription] = useState<string>("");
     React.useEffect(() => {
-       console.log(selectedLanguage); 
-    },[selectedLanguage])
+        console.log(selectedLanguage);
+    }, [selectedLanguage])
 
     const onFocusEffect = React.useCallback(() => {
         // This should be run when screen gains focus - enable the module where it's needed
@@ -32,7 +32,7 @@ const AddTransactionScreen = ({navigation}:any) => {
         <>
 
 
-            <Pressable onPress={() => {navigation.goBack() }} style={styles.backicon}>
+            <Pressable onPress={() => { navigation.navigate("HomeScreen") }} style={styles.backicon}>
                 <ArrowBackIcon />
             </Pressable>
             <Text style={styles.addTransaction}>Add Transaction</Text>
@@ -40,50 +40,68 @@ const AddTransactionScreen = ({navigation}:any) => {
 
             <AvoidSoftInputView>
                 <ScrollView>
-            <TextInput
-                maxLength={40}
-                onChangeText={text => setName(text)}
-                value={name}
-                autoCapitalize='words'
+                    <Text style={styles.secheadtext}>{`Transaction Name`}</Text>
+                    <TextInput
+                        maxLength={40}
+                        onChangeText={text => setName(text)}
+                        value={name}
+                        autoCapitalize='words'
 
-                placeholder="Enter income name*"
-                style={styles.inputContainer} />
-            <View style={styles.inputContainer}>
-                 <Picker
-                   
-                    selectedValue={selectedLanguage}
-                    onValueChange={(itemValue, itemIndex) =>
-                        setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="Java" value="java" />
-                    <Picker.Item label="JavaScript" value="js" />
-                </Picker>
-    </View>
-         
-        
-            <Text style={styles.details}>Amount & Description</Text>
-            <TextInput
-                maxLength={40}
-                keyboardType='numeric'
-                onChangeText={value => setAmount(value.replace(/[^0-9]/g, ''))}
-                value={amount}
-                placeholder="Enter Amount*"
-                style={styles.inputContainer} />
-            <TextInput
-                maxLength={40}
-                onChangeText={text => setDescription(text)}
-                value={description}
-                autoCapitalize='words'
+                        placeholder="Enter transaction name*"
+                        style={styles.inputContainer} />
+                    <Text style={styles.secheadtext}>{`Transaction Type`}</Text>
+                    <View style={styles.inputselect}>
+                        <Picker
 
-                placeholder="Enter Description*"
-                style={styles.inputContainer} />
-                    <Pressable style={styles.createAccountParent} onPress={() => { }}>
-                        <Text style={styles.createAccount}>Create account</Text>
-                    </Pressable>
-            </ScrollView>
+                            selectedValue={selectedLanguage}
+                            onValueChange={(itemValue, itemIndex) =>
+                                setSelectedLanguage(itemValue)
+                            }>
+                            <Picker.Item label="Java" value="java" />
+                            <Picker.Item label="JavaScript" value="js" />
+                        </Picker>
+                    </View>
+                    <Text style={styles.secheadtext}>{`Transaction Type`}</Text>
+                    <View style={styles.inputselect}>
+                        <Picker
+
+                            selectedValue={selectedLanguage}
+                            onValueChange={(itemValue, itemIndex) =>
+                                setSelectedLanguage(itemValue)
+                            }>
+                            <Picker.Item label="Java" value="java" />
+                            <Picker.Item label="JavaScript" value="js" />
+                        </Picker>
+                    </View>
+
+                    <Text style={styles.details}>Amount & Description</Text>
+                    <Text style={styles.secheadtext}>{`Description`}</Text>
+
+                    <TextInput
+                        maxLength={40}
+                        onChangeText={text => setDescription(text)}
+                        value={description}
+                        autoCapitalize='words'
+
+                        placeholder="Enter Description*"
+                        style={styles.inputContainer} />
+                    <Text style={styles.secheadtext}>{`Amount`}</Text>
+
+                    <TextInput
+                        maxLength={40}
+                        keyboardType='numeric'
+                        onChangeText={value => setAmount(value.replace(/[^0-9]/g, ''))}
+                        value={amount}
+                        placeholder="Enter Amount*"
+                        style={styles.inputContainer} />
+
+
+                </ScrollView>
             </AvoidSoftInputView>
 
-            
+            <Pressable style={styles.createAccountParent} onPress={() => { navigation.navigate("AddTransactionScreen") }}>
+                <Text style={styles.createAccount}>Add Transaction</Text>
+            </Pressable>
 
         </>
     )
@@ -92,9 +110,9 @@ const AddTransactionScreen = ({navigation}:any) => {
 export default AddTransactionScreen
 
 const styles = StyleSheet.create({
-    backicon:{
-        marginLeft: dwidth/15,
-        marginTop: dheight/ 20
+    backicon: {
+        marginLeft: dwidth / 15,
+        marginTop: dheight / 20
 
     },
     addTransaction: {
@@ -104,8 +122,8 @@ const styles = StyleSheet.create({
         // fontFamily: "DMSans-Bold",
         color: "#29b029",
         textAlign: "left",
-        marginLeft: dwidth/16,
-        marginTop: dheight/34
+        marginLeft: dwidth / 16,
+        marginTop: dheight / 34
     },
     details: {
         fontSize: 16,
@@ -130,10 +148,10 @@ const styles = StyleSheet.create({
         width: dwidth / 8 * 7,
         paddingVertical: 8,
         paddingHorizontal: 16,
-        marginTop: 24,
+    //
         marginHorizontal: dwidth / 17,
         color: "black"
-        
+
     }
     , createAccount: {
         fontSize: 18,
@@ -152,4 +170,32 @@ const styles = StyleSheet.create({
         paddingHorizontal: 100,
         paddingVertical: 16,
     },
+    secheadtext: {
+        fontSize: 12,
+        letterSpacing: 0.4,
+        lineHeight: 18,
+        fontWeight: "500",
+        fontFamily: "DMSans-Medium",
+        color: "rgba(0, 0, 0, 0.6)",
+        textAlign: "left",
+        marginLeft: dwidth / 12,
+        marginTop: dheight / 60
+    },
+    inputselect: {
+        borderRadius: 15,
+        borderWidth: 1,
+        borderColor: 'rgba(41, 176, 41, 0.20)',
+        // backgroundColor: '#FFF',
+        shadowOffset: { width: 0, height: 25 },
+        shadowRadius: 40,
+        shadowOpacity: 0.06,
+        elevation: -10,
+        width: dwidth / 8 * 7,
+        // paddingVertical: 8,
+        paddingHorizontal: 16,
+        //
+        marginHorizontal: dwidth / 17,
+        color: "black"
+
+    }
 })
