@@ -9,9 +9,19 @@ import auth from '@react-native-firebase/auth';
 
 const signIn = async () => {
     try {
-        await GoogleSignin.hasPlayServices();
-        const userInfo = await GoogleSignin.signIn();
-        console.log(userInfo);
+        // await GoogleSignin.hasPlayServices();
+        // const userInfo = await GoogleSignin.signIn();
+        // console.log(userInfo);
+        await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+        // Get the users ID token
+        const { idToken } = await GoogleSignin.signIn();
+
+        // Create a Google credential with the token
+        const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+        // Sign-in the user with the credential
+        const data = await auth().signInWithCredential(googleCredential);
+        console.log(data);
     } catch (error) {
         // if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         //     // user cancelled the login flow
