@@ -16,15 +16,16 @@ const RegistrationStack = ({navigation}: any) => {
       cardStyle: { backgroundColor: '#fff' }
     }}>
       <RegStack.Screen
-        name="RegistrationScreen"
-        component={RegistrationScreen}
-        options={{headerShown: false}}
-      />
-      <RegStack.Screen
         name="LoginScreen"
         component={LoginScreen}
         options={{ headerShown: false }}
       />
+      <RegStack.Screen
+        name="RegistrationScreen"
+        component={RegistrationScreen}
+        options={{headerShown: false}}
+      />
+    
       <RegStack.Screen
         name="RegistrationOnBoardScreen"
         component={RegistrationOnboardScreen}

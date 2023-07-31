@@ -4,8 +4,27 @@ import { AvoidSoftInput, AvoidSoftInputView } from 'react-native-avoid-softinput
 import { useFocusEffect } from '@react-navigation/native';
 let { width: dwidth, height: dheight, fontScale: fontscale, } = Dimensions.get('window')
 
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
 
-
+const signIn = async () => {
+    try {
+        await GoogleSignin.hasPlayServices();
+        const userInfo = await GoogleSignin.signIn();
+        console.log(userInfo);
+    } catch (error) {
+        // if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        //     // user cancelled the login flow
+        // } else if (error.code === statusCodes.IN_PROGRESS) {
+        //     // operation (e.g. sign in) is in progress already
+        // } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        //     // play services not available or outdated
+        // } else {
+        //     // some other error happened
+        // }
+        console.log(JSON.stringify(error));
+    }
+};
 
 const LoginScreen = ({navigation}:any) => {
 
@@ -71,7 +90,7 @@ const LoginScreen = ({navigation}:any) => {
                 </View>
             </View>
 
-            <Pressable onPress={() => console.log('pressed')}>
+            <Pressable onPress={signIn}>
                 <View style={styles.frameParent}>
                     <View style={styles.iconParent}>
                         <Image style={styles.icon1} resizeMode="cover" source={require("../assets/images/google.png")} />
